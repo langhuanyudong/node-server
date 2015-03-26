@@ -4,8 +4,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var monk = require('monk');
-var db = monk('localhost:27017/node-serve');
+//connect mysql, change  the information to yourself.
+var mysql      = require('mysql');
+//create connection pool
+var connection = mysql.createPool({
+  host     : 'localhost',
+  user     : 'root',
+  password : '123456',
+  database: 'talent',
+  port: 3306
+});
 
 var routes = require('./routes/index');
 var test = require('./routes/test');
@@ -26,7 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Make our db accessible to our router
 app.use(function(req,res,next){
-    req.db = db;
+//    req.db = db;
+    req.db = connection;
     next();
 });
 
