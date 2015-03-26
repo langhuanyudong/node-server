@@ -1,5 +1,4 @@
-# talent
-talent App
+# ForMysql
 
 整体架构和[node-serve](https://github.com/ggice/node-server)相同，不同的是将数据库由mongodb更换成了mysql。
 
